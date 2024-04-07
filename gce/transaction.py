@@ -64,7 +64,7 @@ class TransactionListing(object):
         for transaction in gnc_transactions:
             guid = self.format_guid(transaction.GetGUID())
             date = transaction.GetDate()
-            desc = transaction.GetDescription().decode(CHARSET)
+            desc = transaction.GetDescription().encode().decode(CHARSET)
             amount = get_transaction_str_amount(transaction)
             if not desc.strip() and not float(amount):
                 continue

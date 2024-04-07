@@ -60,14 +60,14 @@ NEWFILEUID:NONE
 
     def set_account(self, name):
         self.account_name = name
-        self.account_id = sha1(name).hexdigest()
+        self.account_id = sha1(name.encode('utf-8')).hexdigest()
 
     def add_transaction(self, guid, unixtime, memo, value):
         self.transactions.append((guid, unixtime, memo, value))
 
     def unixtime2ofx(self, unixtime):
-        dt = datetime.fromtimestamp(unixtime)
-        return dt.strftime("%Y%m%d%H%M%S")
+        #dt = datetime.fromtimestamp(unixtime)
+        return unixtime.strftime("%Y%m%d%H%M%S")
 
     def generate(self, reverse=False):
         earliest_tx = None
